@@ -1,12 +1,23 @@
 // ============================================
+// Nama  : Ni Kadek Okta Pioni
+// NIM   : 202463121008
+// Kelas : K2
+// Tugas : Latihan Dart Mandiri - Minggu 02
+// ============================================
+
+// ============================================
 // TUGAS 1: Konversi Suhu
 // ============================================
-double celsiusKeFahrenheit(double celsius) {
-  return (celsius * 9 / 5) + 32;
+// Fungsi untuk mengubah Celsius ke Fahrenheit
+double konversiKeFahrenheit(double derajatCelsius) {
+  double hasil = (derajatCelsius * 9 / 5) + 32;
+  return hasil;
 }
 
-double celsiusKeKelvin(double celsius) {
-  return celsius + 273.15;
+// Fungsi untuk mengubah Celsius ke Kelvin
+double konversiKeKelvin(double derajatCelsius) {
+  double hasil = derajatCelsius + 273.15;
+  return hasil;
 }
 
 // ============================================
@@ -15,10 +26,11 @@ double celsiusKeKelvin(double celsius) {
 class Produk {
   final String nama;
   final double harga;
-  final double? diskon;
+  final double? diskon; // diskon bersifat opsional, boleh null
 
   Produk({required this.nama, required this.harga, this.diskon});
 
+  // Getter untuk menghitung harga akhir setelah diskon
   double get hargaAkhir {
     if (diskon == null || diskon == 0) {
       return harga;
@@ -26,11 +38,13 @@ class Produk {
     return harga - (harga * diskon! / 100);
   }
 
+  // Getter untuk menampilkan info produk
   String get info {
     if (diskon == null) {
       return '$nama - Rp${harga.toStringAsFixed(0)} (tanpa diskon)';
     }
-    return '$nama - Rp${harga.toStringAsFixed(0)} (diskon ${diskon}%) -> Rp${hargaAkhir.toStringAsFixed(0)}';
+    return '$nama - Rp${harga.toStringAsFixed(0)} '
+        '(diskon ${diskon}%) -> Rp${hargaAkhir.toStringAsFixed(0)}';
   }
 }
 
@@ -38,52 +52,55 @@ class Produk {
 // TUGAS 3: Demonstrasi var, final, const, late
 // ============================================
 void demonstrasiKeyword() {
-  // var: nilai akan berubah
-  var jumlahMahasiswa = 30;
-  jumlahMahasiswa = 35;
-  print('Jumlah mahasiswa: $jumlahMahasiswa');
+  // var: dipakai karena nilainya akan berubah (misal counter)
+  var jumlahPeserta = 25;
+  jumlahPeserta = 30;
+  print('Jumlah peserta: $jumlahPeserta');
 
-  // final: ditentukan saat runtime, tidak berubah
-  final waktuSekarang = DateTime.now();
-  print('Waktu sekarang: $waktuSekarang');
+  // final: nilai ditentukan saat runtime dan tidak akan diubah lagi
+  final waktuDibuat = DateTime.now();
+  print('Waktu dibuat: $waktuDibuat');
 
-  // const: sudah diketahui saat kompilasi
-  const phi = 3.14159;
-  const namaKampus = 'Universitas Warmadewa';
-  print('Phi: $phi');
-  print('Kampus: $namaKampus');
+  // const: nilai sudah tetap saat kompilasi
+  const nilaiPhi = 3.14159;
+  const namaInstitusi = 'Universitas Warmadewa';
+  print('Phi: $nilaiPhi');
+  print('Institusi: $namaInstitusi');
 
-  // late: nilai baru tersedia setelah deklarasi
-  late String statusKelulusan;
-  int nilaiAkhir = 85;
-  if (nilaiAkhir >= 75) {
-    statusKelulusan = 'Lulus';
+  // late: nilai baru diisi setelah deklarasi
+  late String statusAkhir;
+  int nilaiUjian = 80;
+
+  if (nilaiUjian >= 75) {
+    statusAkhir = 'Lulus';
   } else {
-    statusKelulusan = 'Tidak Lulus';
+    statusAkhir = 'Tidak Lulus';
   }
-  print('Status: $statusKelulusan');
+  print('Status: $statusAkhir');
 }
 
 // ============================================
-// MAIN
+// MAIN: Menjalankan semua tugas
 // ============================================
 void main() {
   print('=== TUGAS 1: Konversi Suhu ===');
-  double suhu = 25.0;
-  print('Suhu: $suhu°C');
-  print('Fahrenheit: ${celsiusKeFahrenheit(suhu).toStringAsFixed(2)}°F');
-  print('Kelvin: ${celsiusKeKelvin(suhu).toStringAsFixed(2)}K');
+  double suhuAwal = 30.0;
+  print('Suhu awal: $suhuAwal derajat Celsius');
+  print('Hasil Fahrenheit: '
+      '${konversiKeFahrenheit(suhuAwal).toStringAsFixed(2)} F');
+  print('Hasil Kelvin: '
+      '${konversiKeKelvin(suhuAwal).toStringAsFixed(2)} K');
 
   print('');
   print('=== TUGAS 2: Class Produk ===');
-  final produk1 = Produk(nama: 'Buku Tulis', harga: 15000);
-  print(produk1.info);
-  final produk2 = Produk(nama: 'Pulpen', harga: 20000, diskon: 10);
-  print(produk2.info);
-  final produk3 = Produk(nama: 'Tas', harga: 150000, diskon: 25);
-  print(produk3.info);
+  final barang1 = Produk(nama: 'Buku Gambar', harga: 12000);
+  print(barang1.info);
+  final barang2 = Produk(nama: 'Pensil Warna', harga: 25000, diskon: 15);
+  print(barang2.info);
+  final barang3 = Produk(nama: 'Tas Sekolah', harga: 180000, diskon: 20);
+  print(barang3.info);
 
   print('');
-  print('=== TUGAS 3: Keyword ===');
+  print('=== TUGAS 3: Keyword var, final, const, late ===');
   demonstrasiKeyword();
 }
